@@ -1,0 +1,18 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('git checkout') {
+            steps {
+                git branch: 'main', url: 'https://github.com/subhansu7/Terraform-CI-CD.git'
+            }
+        }
+        stage('terraform init, plan, apply') {
+            steps {
+                sh 'terraform init'
+                sh 'terraform plan'
+                sh 'terraform apply -auto-approve'
+            }
+        }
+     }
+}
