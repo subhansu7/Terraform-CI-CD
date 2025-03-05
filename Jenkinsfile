@@ -2,11 +2,11 @@ pipeline {
     agent any
 
     stages {
-        // stage('clone') {
-        //     steps {
-        //       // git branch: 'main', url: 'https://github.com/CloudTechDevOps/Terraform_CICD.git'
-        //     }
-        // }
+        stage('clone') {
+            steps {
+                git branch: 'main', url: 'https://github.com/subhansu7/Terraform-CI-CD.git'
+            }
+        }
         stage('init') {
             steps {
                 sh 'terraform init'
