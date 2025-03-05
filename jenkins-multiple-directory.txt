@@ -1,0 +1,33 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('git checkout') {
+            steps {
+                git branch: 'main', url: 'https://github.com/subhansu7/Terraform2025.git'
+            }
+        }
+        stage('terraform init') {
+            
+            steps {
+                dir('Day-2-BasicCommands') {
+                sh 'terraform init'
+            }
+        }
+        }
+        stage('terraform plan') {
+            steps {
+              dir('Day-2-BasicCommands') {
+              sh 'terraform plan'
+            }
+        }
+        }
+        stage('terraform apply') {
+            steps {
+                dir('Day-2-BasicCommands') {
+                sh 'terraform ${action} -auto-approve'
+            }
+        }
+    }
+    }
+}
