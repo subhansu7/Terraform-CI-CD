@@ -7,6 +7,6 @@ resource "aws_instance" "dev" {
     instance_type = "t2.nano"
     key_name = "key-n-virginia"
     tags = {
-      Name = "dev1234"
+      Name = "dev12345"
     }
 }
