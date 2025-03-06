@@ -1,0 +1,39 @@
+pipeline {
+    agent any
+
+    parameters {
+        choice (name: 'TF_ACTION', choices: ['none', 'apply', 'destroy'] , description: 'Select value to apply Terraform changes')
+    }
+
+    stages {
+        stage('git checkout') {
+            steps {
+               git branch: 'main', url: 'https://github.com/subhansu7/Terraform2025.git'
+            }
+        }
+        stage('terraform init') {
+            steps {
+                dir('Day-2-BasicCommands') {
+                    sh 'terraform init'
+                }
+            }
+        }
+        stage('terraform plan') {
+            steps {
+                dir('Day-2-BasicCommands') {
+                    sh 'terraform plan'
+                }
+            }
+        }
+        stage('terraform apply') {
+            when {
+                expression { return params.TF_ACTION }
+            }
+            steps {
+                dir('Day-2-BasicCommands') {
+                    sh 'terraform ${TF_ACTION} -auto-approve'
+                }
+            }
+        }
+    }
+}
