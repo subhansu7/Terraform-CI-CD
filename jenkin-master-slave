@@ -1,0 +1,14 @@
+pipeline {
+    agent any // If we do not specifcy any agent name, Jenkin will run pipeline on master
+    // agent {
+    //     label 'dev' //this is agent label name which will run on slave node
+    // }
+    
+    stages {
+        stage('Hello') {
+            steps {
+                git branch: 'main', url: 'https://github.com/subhansu7/Terraform-CI-CD.git'
+            }
+        }
+    }
+}
