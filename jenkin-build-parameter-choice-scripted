@@ -3,6 +3,7 @@ pipeline {
 
     parameters {
         choice (name: 'TF_ACTION', choices: ['none', 'apply', 'destroy'] , description: 'Select value to apply Terraform changes')
+        //booleanParam(name: 'APPLY_TF', defaultValue: false, description: 'Set to true to apply Terraform changes') -- Single condition check
     }
 
     stages {
@@ -27,11 +28,11 @@ pipeline {
         }
         stage('terraform apply') {
             when {
-                expression { return params.TF_ACTION }
+                expression { return params.TF_ACTION } // Change variable name as per parameter block
             }
             steps {
                 dir('Day-2-BasicCommands') {
-                    sh 'terraform ${TF_ACTION} -auto-approve'
+                    sh 'terraform ${TF_ACTION} -auto-approve' // Change variable name as per parameter block
                 }
             }
         }
