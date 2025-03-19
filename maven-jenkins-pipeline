@@ -1,0 +1,16 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('git clone') {
+            steps {
+                git branch: 'main', url: 'https://github.com/CloudTechDevOps/project-1-maven-jenkins-CICD-docker-eks-.git'
+            }
+        }
+        stage('maven build') {
+            steps {
+                sh 'mvn clean'
+            }
+        }
+    }
+}
